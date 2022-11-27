@@ -16,11 +16,11 @@ ALLOWED_HOSTS = ['localhost', 'hafidgoodmagic.com', '*']
 DATABASES = {
     "default": {
         "ENGINE"  : "django.db.backends.postgresql_psycopg2",
-        "NAME"    : 'hafidgoodmagic',
-        "USER"    : 'hafidgoodmagic',
+        "NAME"    : 'hafidgood_db',
+        "USER"    : 'hafidev',
         "PASSWORD": '#yiy*8c%dh02^&mm',
         "HOST"    : 'localhost',
-        "PORT"    : '5432',
+        "PORT"    : '',
     }
 }
 
