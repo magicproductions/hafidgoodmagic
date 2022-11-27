@@ -1,0 +1,63 @@
+{% load static wagtailimages_tags %}
+
+<div class="tt-section">
+  <div class="tt-section-inner">
+    <!--Begin content carousel -->
+    <div class="tt-content-carousel cc-shifted cursor-drag cc-scale-down cc-hide-pagination cc-hide-navigation"
+         data-simulate-touch="true" data-speed="1500" data-autoplay="5000">
+      <!-- Begin swiper container -->
+      <div class="swiper">
+        <!-- Begin swiper wrapper (required) -->
+        <div class="swiper-wrapper">
+          <!-- Begin swiper slide -->
+          {% for item in self.items_carousel %}
+            {% image item.image fill-800x400 as img %}
+            {% if item.image %}
+              <div class="swiper-slide">
+                <div class="tt-content-carousel-item">
+                  <figure class="cover-opacity-1">
+                    <img class="tt-cc-image anim-image-parallax swiper-lazy"
+                         src="{{ img.url }}"
+                         data-src="{{ img.url }}" alt="{{ img.alt }}">
+                    <!-- <figcaption>Image Caption</figcaption> -->
+                  </figure>
+                </div> <!-- /.tt-content-carousel-item -->
+              </div>
+          <!-- End swiper slide -->
+            {% elif item.video %}
+              <div class="swiper-slide">
+                <div class="tt-content-carousel-item">
+                  <figure class="cover-opacity-1">
+                    {# wagtailvideos_tags {% video item.video autoplay loop muted playsinline width=1000 %}#}
+                    {% image item.video_poster fill-800x400 as img %}
+                    <video class="tt-cc-video" controls autoplay loop muted playsinline preload="metadata"
+                           poster="{{ img.url }}">
+                      <source src="{{ item.video.url }}" type="video/mp4">
+                      <source src="{{ item.video.url }}" type="video/webm">
+                    </video>
+                  </figure>
+                </div> <!-- /.tt-content-carousel-item -->
+              </div>
+          <!-- End swiper slide -->
+            {% endif %}
+          {% endfor %}
+          <!-- Begin swiper slide-->
+        </div>
+        <!-- End swiper wrapper -->
+      </div>
+      <!-- End swiper container -->
+      <!-- Begin content carousel navigation -->
+      <div class="tt-cc-nav-prev">
+        <div class="tt-cc-nav-arrow magnetic-item"></div>
+      </div>
+      <div class="tt-cc-nav-next">
+        <div class="tt-cc-nav-arrow magnetic-item"></div>
+      </div>
+      <!-- End content carousel navigation -->
+      <!-- Content carousel pagination -->
+      <div class="tt-cc-pagination hide-cursor"></div>
+    </div>
+    <!-- End content carousel -->
+  </div> <!-- /.tt-section-inner -->
+</div>
+<!-- End tt-section -->

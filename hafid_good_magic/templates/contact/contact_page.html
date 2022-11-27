@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static wagtailcore_tags widget_tweaks %}
+
+{% block content %}
+  <div id="page-header" class="ph-full ph-cap-xxlg ph-center ph-image-cropped ph-image-cover-2 ph-content-parallax">
+    <div class="page-header-inner tt-wrap">
+      <div class="ph-image">
+        <div class="ph-image-inner">
+          <img src="{% static 'assets/img/page-header/ph-3.jpg' %}" alt="Image">
+        </div>
+      </div>
+      <div class="ph-caption">
+        <h1 class="ph-caption-title ph-appear">Contact</h1>
+        <div class="ph-caption-title-ghost ph-appear">Contact</div>
+        <div class="ph-caption-subtitle ph-appear">{{ self.intro|richtext }}</div>
+      </div>
+      <!-- End page header caption -->
+    </div> <!-- /.page-header-inner -->
+    <a href="#page-content" class="scroll-down-circle" data-offset="30">
+      <div class="sdc-inner ph-appear">
+        <div class="sdc-icon"><i class="fas fa-chevron-down"></i></div>
+        <svg viewBox="0 0 500 500">
+          <defs>
+            <path d="M50,250c0-110.5,89.5-200,200-200s200,89.5,200,200s-89.5,200-200,200S50,360.5,50,250"
+                  id="textcircle"></path>
+          </defs>
+          <text dy="30">
+            <textPath xlink:href="#textcircle">Scroll down - Scroll down -</textPath>
+          </text>
+        </svg>
+      </div> <!-- /.sdc-inner -->
+    </a>
+    <div class="made-with-love ph-appear">
+      <div class="mwl-inner">
+        <div class="mwl-text">Made with</div>
+        <div class="mwl-icon"><i class="far fa-heart"></i></div>
+      </div>
+    </div><!-- End made with love -->
+  </div>
+  <!-- End page header -->
+  <div id="page-content">
+    <div class="tt-section">
+      <div class="tt-section-inner tt-wrap">
+        <div class="tt-row">
+          <div class="tt-col-lg-5 padding-right-lg-5-p">
+            <div class="tt-heading tt-heading-lg margin-bottom-10-p anim-fadeinup">
+              <h3 class="tt-heading-subtitle text-gray">Get in Touch</h3>
+              <h2 class="tt-heading-title">Drop Us<br> A Line</h2>
+            </div>
+            <!-- End tt-Heading -->
+            <ul class="tt-contact-info padding-bottom-40 text-gray">
+              <li class="anim-fadeinup">
+                <span class="tt-ci-icon"><i class="fas fa-map-marker-alt"></i></span>
+                London, UK
+              </li>
+              <li class="anim-fadeinup">
+                <span class="tt-ci-icon"><i class="fas fa-phone"></i></span>
+                <a href="tel:+447514439055" class="tt-link">+44 75144 39055</a>
+              </li>
+              <li class="anim-fadeinup">
+                <span class="tt-ci-icon"><i class="fas fa-envelope"></i></span>
+                <a href="mailto:contact@hafidgoodmagic.com" class="tt-link">contact@hafidgoodmagic.com</a>
+              </li>
+              <li class="anim-fadeinup">
+                <h6 class="no-margin-bottom margin-top-40">Follow:</h6>
+                <!-- Begin social buttons -->
+                {% include 'includes/social_links.html' %}
+                <!-- End social buttons -->
+              </li>
+            </ul>
+            <!-- End contact info -->
+          </div> <!-- /.tt-col -->
+          <div class="tt-col-lg-7">
+            <!-- Begin form-->
+            <form action="{% pageurl page %}" method="POST" id="tt-contact-form" class="tt-form-minimal anim-fadeinup">
+              {% csrf_token %}
+              {% for field in form %}
+                {{ field.label_tag }} {% if field.field.required %}<span class="required">*</span>{% endif %}
+                {{ field }}
+              {% endfor %}
+              <div id="success_div" class="alert alert-success text-center" role="alert" style="display: none">
+                Thank you for contacting us. We will get back to you soon.
+              </div>
+              <small class="tt-form-text"><em>Fields marked with an asterisk (*) are required!</em></small>
+              <div class="tt-btn tt-btn-light-outline margin-top-40">
+                <button type="submit" data-hover="Magic Happen">Send Message</button>
+              </div>
+            </form>
+            <!-- End form -->
+          </div> <!-- /.tt-col -->
+        </div> <!-- /.tt-row -->
+      </div> <!-- /.tt-section-inner -->
+    </div>
+    <!-- End tt-section -->
+  </div>
+  <!-- End page content -->
+{% endblock %}

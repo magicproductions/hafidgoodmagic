@@ -1,0 +1,22 @@
+{% load wagtailimages_tags %}
+
+<div class="tt-section padding-top-xlg-150 padding-bottom-xlg-150 bg-white-accent-2">
+  <div class="tt-section-inner tt-wrap">
+    <!-- Begin tt-Heading-->
+    <div class="tt-heading tt-heading-xxlg tt-heading-stroke tt-heading-center margin-bottom-10-p anim-fadeinup">
+      <h3 class="tt-heading-subtitle text-gray">{{ self.grey_title }}</h3>
+      <h2 class="tt-heading-title">{{ self.title }}</h2>
+      <!-- <h3 class="tt-heading-subtitle text-gray">Subtitle</h3> -->
+    </div>
+    <!-- End tt-Heading -->
+    <!-- Begin logo wall -->
+    <ul class="tt-logo-wall cl-col-44 anim-fadeinup">
+      {% for brand_img in self.brands_images %}
+        {% image brand_img.image fill-400x400 as img %}
+        <li><img src="{{ img.url }}" alt="Client"></li>
+      {% endfor %}
+    </ul>
+    <!-- End logo wall -->
+  </div> <!-- /.tt-section-inner -->
+</div>
+<!-- End tt-section -->

@@ -1,0 +1,30 @@
+{% load wagtailimages_tags %}
+<!-- Projects Section -->
+<section class="folio-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-title text-center">
+          <h2>Our Latest <span>Projects</span></h2>
+        </div>
+      </div>
+      {% for project in self.project_info %}
+        {% image project.image fill-500x260 as img %}
+        <div class="col-md-6">
+          <div class="folio-item">
+            <div class="img-folio cursorExplore">
+              <a onclick='window.open("{{ project.button_url }}");return false;' class="load-spiral"
+                 rel="noopener noreferrer">
+                <img class="img-fluid" draggable="false" alt="{{ img.alt }}" src={{ img.url }}>
+              </a>
+            </div>
+            <div class="text-folio text-center">
+              <h2 class="text-1">{{ project.title }}</h2>
+              <h2 class="text-2">{{ project.title }}</h2>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

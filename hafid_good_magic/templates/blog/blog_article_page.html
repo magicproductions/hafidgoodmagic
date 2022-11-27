@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load wagtailimages_tags wagtailcore_tags cache %}
+
+{% block content %}
+  {% image self.intro_image fill-900x400 as intro_img %}
+  {% image self.blog_image max-1200x900 as blog_banner %}
+  {% cache 604800 article_post_preview %}
+    <div id="page-header"
+         class="ph-full ph-cap-sm ph-center ph-bg-image ph-image-shadow ph-image-cover-6 ph-content-parallax">
+      <div class="page-header-inner tt-wrap max-width-1400">
+        <!-- Begin page header image -->
+        <div class="ph-image">
+          <div class="ph-image-inner">
+            <img src="{{ blog_banner.url }}" alt="Image">
+          </div>
+        </div>
+        <!-- End page header image -->
+        <!-- Begin page header caption -->
+        <div class="ph-caption">
+          <h2 class="ph-caption-title ph-appear">{{ self.title }}</h2>
+        </div>
+        <!-- End page header caption -->
+      </div> <!-- /.page-header-inner -->
+             <!-- Begin scroll down circle -->
+      <a href="#page-content" class="scroll-down-circle" data-offset="30">
+        <div class="sdc-inner ph-appear">
+          <div class="sdc-icon"><i class="fas fa-chevron-down"></i></div>
+          <svg viewBox="0 0 500 500">
+            <defs>
+              <path d="M50,250c0-110.5,89.5-200,200-200s200,89.5,200,200s-89.5,200-200,200S50,360.5,50,250"
+                    id="textcircle"></path>
+            </defs>
+            <text dy="30">
+              <textPath xlink:href="#textcircle">Scroll down - Scroll down -</textPath>
+            </text>
+          </svg>
+        </div> <!-- /.sdc-inner -->
+      </a>
+             <!-- End scroll down circle -->
+             <!-- Begin made with love -->
+      <div class="made-with-love ph-appear">
+        <div class="mwl-inner">
+          <div class="mwl-text">Made with</div>
+          <div class="mwl-icon"><i class="far fa-heart"></i></div>
+        </div>
+      </div><!-- End made with love -->
+    </div>
+    <!-- End page header -->
+    <!-- *************************************
+    *********** Begin page content ***********
+    ************************************** -->
+    <div id="page-content">
+      <div class="tt-section">
+        <div class="tt-section-inner tt-wrap max-width-900">
+          <!-- Begin blog post -->
+          <article class="tt-blog-post lightgallery">
+            <!-- Begin blog post content -->
+            <div class="tt-blog-post-content">
+              {% for block in page.content %}
+                {% include_block block %}
+              {% endfor %}
+            </div><!-- End blog post content -->
+          </article>
+          <div class="tt-btn tt-btn-link">
+            <a href="/contact/" class="scroll-to-top" data-hover="Hafid Good">Get In Touch</a>
+          </div>
+          <!-- End blog post -->
+        </div> <!-- /.tt-section-inner -->
+      </div>
+      <!-- End tt-section -->
+    </div>
+    <!-- End page content -->
+  {% endcache %}
+{% endblock %}

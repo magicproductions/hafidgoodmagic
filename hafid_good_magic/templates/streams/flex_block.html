@@ -1,0 +1,22 @@
+{% load static wagtailimages_tags %}
+
+<div class="tt-section">
+  <div class="tt-section-inner tt-wrap">
+    <div class="tt-row">
+      <div class="tt-col-lg-4 padding-right-lg-5-p">
+        <!-- Begin tt-Heading-->
+        <div class="tt-heading tt-heading-sm margin-bottom-60 anim-fadeinup">
+          <h2 class="tt-heading-title text-gray">The<br class="hide-from-md"> {{ self.title }}</h2>
+          <!-- <h3 class="tt-heading-subtitle text-gray">Subtitle</h3> -->
+        </div>
+        <!-- End tt-Heading -->
+      </div> <!-- /.tt-col -->
+      <div class="tt-col-lg-8">
+        <div class="text-xxlg font-alter">
+          <p class="anim-fadeinup">{{ self.text }}</p>
+        </div>
+      </div> <!-- /.tt-col -->
+    </div> <!-- /.tt-row -->
+  </div> <!-- /.tt-section-inner -->
+</div>
+<!-- End tt-section -->

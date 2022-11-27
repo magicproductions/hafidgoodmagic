@@ -1,0 +1,69 @@
+{% load static wagtailvideos_tags wagtailcore_tags wagtailimages_tags %}
+{% image self.block_image fill-600x600 as img %}
+
+
+<div class="tt-grid-item isotope-item people">
+  <div class="ttgr-item-inner">
+    <div class="portfolio-grid-item">
+
+      {% if self.button_page %}
+        <a href="{{ self.button_page.url }}" class="pgi-image-wrap" data-cursor="View<br>Show">
+          <!-- Use class "cover-opacity-*" to set image overlay if needed. For example "cover-opacity-2".
+          Useful if class "pgi-cap-inside" is enabled on "portfolio-grid". Note: It is individual and depends on the
+          image you use. More info about helper classes in file "helper.css". -->
+          <div class="pgi-image-holder cover-opacity-2">
+            <div class="pgi-image-inner anim-zoomin">
+              <figure class="pgi-image ttgr-height">
+                <img src="{{ img.url }}" alt="{{ img.alt }}">
+              </figure> <!-- /.pgi-image -->
+            </div> <!-- /.pgi-image-inner -->
+          </div> <!-- /.pgi-image-holder -->
+        </a> <!-- /.pgi-image-wrap -->
+      {% elif self.button_url %}
+        <a href="{{ self.button_url }}" target="_blank" class="pgi-image-wrap" data-cursor="View<br>Show">
+          <div class="pgi-image-holder cover-opacity-2">
+            <div class="pgi-image-inner anim-zoomin">
+
+              {% video self.block_video autoplay controls width=256 %}
+              {% if self.block_video %}
+                <h1>Hello World</h1>
+
+                <figure class="pgi-video-wrap ttgr-height">
+                  <video class="pgi-video" loop muted preload="metadata"
+                         poster="{% static 'assets/vids/fashion-week.jpg' %}">
+                    <source src="{% static 'assets/vids/fashion-week.mp4' %}" type="video/mp4">
+                    <source src="{% static 'assets/vids/fashion-week.webm' %}" type="video/webm">
+                  </video>
+                </figure> <!-- /.pgi-video-wrap -->
+              {% endif %}
+
+              {#                         poster="{{ video.thumbnail }}">#}
+              {#                    <source src="{{ video }}" type="video/mp4">#}
+              {#                    <source src="{{ video }}" type="video/webm">#}
+              {% if img.url %}
+                <figure class="pgi-image ttgr-height">
+                  <img src="{{ img.url }}" alt="{{ img.alt }}">
+                </figure> <!-- /.pgi-image -->
+              {% endif %}
+
+
+            </div> <!-- /.pgi-image-inner -->
+          </div> <!-- /.pgi-image-holder -->
+        </a> <!-- /.pgi-image-wrap -->
+      {% endif %}
+
+
+      <div class="pgi-caption">
+        <div class="pgi-caption-inner">
+          <h2 class="pgi-title">{{ self.title }}</h2>
+          <div class="pgi-categories-wrap">
+            <div class="pgi-category">{{ self.text|richtext }}</div>
+            <!-- <div class="pgi-category">Varia</div> -->
+          </div> <!-- /.pli-categories-wrap -->
+        </div> <!-- /.pgi-caption-inner -->
+      </div> <!-- /.pgi-caption -->
+    </div>
+    <!-- End portfolio grid item -->
+  </div> <!-- /.ttgr-item-inner -->
+</div>
+<!-- End tt-Grid item -->

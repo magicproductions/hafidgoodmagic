@@ -1,0 +1,45 @@
+{% load static wagtailimages_tags %}
+
+<div class="tt-section padding-top-xlg-150 padding-bottom-xlg-100 padding-left-sm-3-p padding-right-sm-3-p bg-white-accent-3">
+  <div class="tt-section-inner">
+    <!-- Begin testimonials slider-->
+    <div class="tt-testimonials-slider ts-full-width text-center cursor-drag ts-scale-down ts-hide-navigation anim-fadeinup"
+         data-loop="true" data-simulate-touch="true" data-speed="1500" data-autoplay="2000">
+      <!-- Begin swiper container -->
+      <div class="swiper">
+        <!-- Begin swiper wrapper (required) -->
+        <div class="swiper-wrapper">
+          <!-- Begin swiper slide -->
+          {% for testimonial in self.testimonials %}
+            <div class="swiper-slide font-alter">
+              <div class="img-bg">
+                {% image self.bg_image fill-400x400 as img %}
+                <img src="{{ img.url }}" alt="{{ img.alt }}">
+                <div class="tt-ts-item">
+                  <div class="tt-ts-text">
+                    {{ testimonial.text }}
+                  </div>
+                </div>
+                <div class="tt-ts-subtext">- {{ testimonial.author }}</div>
+              </div>
+            </div>
+          {% endfor %}
+          <!-- End swiper slide -->
+        </div>
+        <!-- End swiper wrapper -->
+      </div>
+      <!-- End swiper container -->
+      <!-- Testimonials slider navigation (arrows) -->
+      <div class="tt-ts-nav-prev">
+        <div class="tt-ts-nav-arrow magnetic-item"></div>
+      </div>
+      <div class="tt-ts-nav-next">
+        <div class="tt-ts-nav-arrow magnetic-item"></div>
+      </div>
+      <!-- Testimonials slider pagination -->
+      <div class="tt-ts-pagination hide-cursor"></div>
+    </div>
+    <!-- End testimonials slider -->
+  </div> <!-- /.tt-section-inner -->
+</div>
+<!-- End tt-section -->

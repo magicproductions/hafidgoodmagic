@@ -1,0 +1,40 @@
+<div class="social-buttons">
+  <ul>
+    {% if settings.social_media.SocialMediaSettings.linkedin %}
+      <li>
+        <a href="{{ settings.social_media.SocialMediaSettings.linkedin }}"
+           class="magnetic-item" target="_blank" rel="noopener">Ln.
+        </a>
+      </li>
+    {% endif %}
+    {% if settings.social_media.SocialMediaSettings.instagram %}
+      <li>
+        <a href="{{ settings.social_media.SocialMediaSettings.instagram }}"
+           class="magnetic-item" target="_blank" rel="noopener">Ig.
+        </a>
+      </li>
+    {% endif %}
+    {% if settings.social_media.SocialMediaSettings.facebook %}
+      <li>
+        <a href="{{ settings.social_media.SocialMediaSettings.facebook }}"
+           class="magnetic-item" target="_blank" rel="noopener">Fb.
+        </a>
+      </li>
+    {% endif %}
+    {% if settings.social_media.SocialMediaSettings.twitter %}
+      <li>
+        <a href="{{ settings.social_media.SocialMediaSettings.twitter }}"
+           class="magnetic-item" target="_blank" rel="noopener">Tw.
+        </a>
+      </li>
+    {% endif %}
+    {% if settings.social_media.SocialMediaSettings.youtube %}
+      <li>
+        <a href="{{ settings.social_media.SocialMediaSettings.youtube }}"
+           class="magnetic-item" target="_blank" rel="noopener">Yt.
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</div>
+<!-- /.social-buttons -->

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+  <div id="page-header" class="ph-full ph-cap-xxlg ph-center ph-image-cropped ph-image-cover-4 ph-content-parallax">
+    <div class="page-header-inner tt-wrap">
+      <!-- Begin page header image-->
+      <div class="ph-image">
+        <div class="ph-image-inner">
+          {% image self.hero_image fill-400x600 as img %}
+          {% image self.hero_image fill-400x600 format-webp as webp_img %}
+          <picture>
+            <source srcset="{{ webp_img.url }}" type="image/webp">
+            <img src="{{ img.url }}" alt="{{ img.alt }}">
+          </picture>
+        </div>
+      </div>
+      <!-- End page header image -->
+      <!-- Begin page header caption -->
+      <div class="ph-caption">
+        <h1 class="ph-caption-title ph-appear">{{ self.title }}</h1>
+        <div class="ph-caption-title-ghost ph-appear">{{ self.title }}</div>
+        <div class="ph-caption-subtitle ph-appear">{{ self.subtitle }}</div>
+      </div>
+      <!-- End page header caption -->
+    </div> <!-- /.page-header-inner -->
+           <!-- Begin scroll down circle (you can change "data-offset" to set scroll top offset)-->
+    <a href="#page-content" class="scroll-down-circle" data-offset="30">
+      <div class="sdc-inner ph-appear">
+        <div class="sdc-icon"><i class="fas fa-chevron-down"></i></div>
+        <svg viewBox="0 0 500 500">
+          <defs>
+            <path d="M50,250c0-110.5,89.5-200,200-200s200,89.5,200,200s-89.5,200-200,200S50,360.5,50,250"
+                  id="textcircle"></path>
+          </defs>
+          <text dy="30">
+            <textPath xlink:href="#textcircle">Scroll down - Scroll down -</textPath>
+          </text>
+        </svg>
+      </div> <!-- /.sdc-inner -->
+    </a>
+           <!-- End scroll down circle -->
+           <!-- Begin made with love-->
+    <div class="made-with-love ph-appear">
+      <div class="mwl-inner">
+        <div class="mwl-text">Made with</div>
+        <div class="mwl-icon"><i class="far fa-heart"></i></div>
+      </div>
+    </div>
+           <!-- End made with love -->
+  </div>
+  <!-- End page header -->
+  <div id="page-content">
+    {% for block in page.content %}
+      {% include_block block %}
+    {% endfor %}
+  </div>
+{% endblock %}

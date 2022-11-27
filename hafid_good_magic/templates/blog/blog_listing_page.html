@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags cache %}
+
+{% block content %}
+
+  <div id="page-header" class="ph-cap-lg ph-center ph-image-cropped ph-image-cover-4 ph-content-parallax">
+    <div class="page-header-inner tt-wrap">
+      <div class="ph-caption">
+        <h1 class="ph-caption-title ph-appear">Blog</h1>
+        <div class="ph-caption-title-ghost ph-appear">Blog</div>
+        <div class="ph-caption-subtitle ph-appear">Magic &amp; News</div>
+        {#        <div class="bli-read-more tt-btn tt-btn-link">#}
+        {#          <a href="{% routablepageurl page 'latest_posts' %}" data-hover="Read More">Latest Articles</a>#}
+        {#        </div>#}
+      </div><!-- End page header caption -->
+    </div> <!-- /.page-header-inner -->
+
+    <a href="#page-content" class="scroll-down-circle" data-offset="30">
+      <div class="sdc-inner ph-appear">
+        <div class="sdc-icon"><i class="fas fa-chevron-down"></i></div>
+        <svg viewBox="0 0 500 500">
+          <defs>
+            <path d="M50,250c0-110.5,89.5-200,200-200s200,89.5,200,200s-89.5,200-200,200S50,360.5,50,250"
+                  id="textcircle">
+            </path>
+          </defs>
+          <text dy="30">
+            <!--suppress XmlUnboundNsPrefix -->
+            <textPath xlink:href="#textcircle">Scroll down - Scroll down -</textPath>
+          </text>
+        </svg>
+      </div> <!-- /.sdc-inner -->
+    </a>
+           <!-- End scroll down circle -->
+           <!-- Begin made with love -->
+    <div class="made-with-love ph-appear">
+      <div class="mwl-inner">
+        <div class="mwl-text">Made with</div>
+        <div class="mwl-icon"><i class="far fa-heart"></i></div>
+      </div>
+    </div><!-- End made with love -->
+  </div>
+  <!-- End page header -->
+
+  <div id="page-content">
+    <div class="tt-section">
+      <div class="tt-section-inner tt-wrap">
+        <div id="blog-list" class="bli-image-cropped bli-compact">
+          <!-- Begin blog list item  -->
+          {% for post in posts %}
+            {% cache 604800 blog_post_preview post.id %}
+              <article class="blog-list-item">
+                <!-- Begin blog list item image -->
+                {% image post.blog_image fill-450x450 as img %}
+                <a href="{{ post.url }}" class="bli-image-wrap" data-cursor="Read<br>More">
+                  <figure class="bli-image">
+                    <img src="{{ img.url }}"
+                         data-src="{{ img.url }}"
+                         class="tt-lazy anim-zoomin" alt="{{ img.alt }}">
+                  </figure>
+                </a>
+                <!-- End blog list item image -->
+
+                <!-- Begin blog list item info -->
+                <div class="bli-info">
+                  {#                <div class="bli-categories">#}
+                  {#                  {% for cat in post.categories.all %}#}
+                  {#                    <a href="{{ self.url }}category/{{ cat.slug }}/" class="ph-category">{{ cat.name }}</a>#}
+                  {#                  {% endfor %}#}
+                  {#                </div>#}
+
+                  <h2 class="bli-title">
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                  </h2>
+                  {#                <div class="bli-meta">#}
+                  {#                  <span class="published">May 26, 2021</span>#}
+                  {#                  <span class="posted-by">- by#}
+                  {#                    {% for author in authors %}#}
+                  {#                      <a href="{{ post.url }}" title="View all posts by John Doe">{{ author.name }}</a>#}
+                  {#                    {% endfor %}#}
+                  {#                  </span>#}
+                  {#                </div>#}
+                  <div class="bli-desc">{{ post.excerpt }}</div>
+                  <div class="bli-read-more tt-btn tt-btn-link">
+                    <a href="{{ post.url }}" data-hover="Read More">Read More</a>
+                  </div>
+                </div>
+                <!-- End blog list item info -->
+              </article>
+          <!-- End blog list item -->
+            {% endcache %}
+          {% endfor %}
+        </div>
+        <!-- End blog list -->
+        <!-- Begin tt-pagination Use class "tt-pagin-center" to align center.-->
+        <div class="tt-pagination tt-pagin-center anim-fadeinup">
+          {% if posts.paginator.num_pages > 1 %}
+            {% if posts.has_previous %}
+              <div class="tt-pagin-prev">
+                <a href="?page={{ posts.previous_page_number }}" class="tt-pagin-item magnetic-item">
+                  <i class="fas fa-chevron-left"></i>
+                </a>
+              </div>
+            {% endif %}
+            {% if posts.number|add:'-2' > 1 %}
+              <a href="?page={{ posts.number|add:'-3' }}" class="tt-pagin-item magnetic-item">
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+              </a>
+            {% endif %}
+            {% for page_num in posts.paginator.page_range %}
+              {% if posts.number == page_num %}
+                <div class="tt-pagin-numbers">
+                  <a href="?page={{ page_num }}" class="tt-pagin-item magnetic-item active">{{ page_num }}</a>
+                </div>
+              {% elif page_num > posts.number|add:'-3' and page_num < posts.number|add:'3' %}
+                <div class="tt-pagin-numbers">
+                  <a href="?page={{ page_num }}" class="tt-pagin-item magnetic-item">{{ page_num }}</a>
+                </div>
+              {% endif %}
+            {% endfor %}
+            {% if posts.paginator.num_pages > posts.number|add:'2' %}
+              <a href="?page={{ posts.number|add:'3' }}" class="tt-pagin-item magnetic-item">
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+              </a>
+            {% endif %}
+            {% if posts.has_next %}
+              <div class="tt-pagin-next">
+                <a href="?page={{ posts.next_page_number }}" class="tt-pagin-item tt-pagin-next magnetic-item">
+                  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+      <!-- End tt-pagination -->
+    </div> <!-- /.tt-section-inner -->
+  </div>
+  <!-- End tt-section -->
+
+{% endblock content %}

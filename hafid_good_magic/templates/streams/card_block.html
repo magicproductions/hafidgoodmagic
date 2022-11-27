@@ -1,0 +1,34 @@
+{% load wagtailimages_tags %}
+
+<section class="event event-two">
+  <div class="container">
+    <h1 class="text-center mb-sm-5">{{ self.title }}</h1>
+    <div class="event-items">
+      <div class="row">
+        {% for card in self.cards %}
+          {% image card.image fill-300x200 as img %}
+          <div class="col-lg-4 col-sm-6 col-xs-12">
+            <div class="event-item">
+              <div class="event-image">
+                <img src="{{ img.url }}" alt="{{ img.alt }}" class="card-img-top"/>
+              </div>
+              <div class="event-content">
+                <h4>{{ card.title }}</h4>
+                <p>{{ card.text }}</p>
+                {% if card.button_page %}
+                  <a href="{{ card.button_page.url }}" class="button-default">
+                    Learn More
+                  </a>
+                {% elif card.button_url %}
+                  <a href="{{ card.button_url }}" class="button-default">
+                    Learn More
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

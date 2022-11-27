@@ -1,0 +1,32 @@
+{% load wagtailimages_tags %}
+<div class="tt-section padding-bottom-xlg-150 padding-left-sm-3-p padding-right-sm-3-p">
+  <div class="tt-section-inner tt-wrap max-width-1100">
+    <div class="tt-heading tt-heading-lg tt-heading-center margin-bottom-15-p anim-fadeinup">
+      <h2 class="tt-heading-title">{{ self.section_title }}</h2>
+    </div>
+    <div class="margin-bottom-15-p">
+      <h4 class="home_h4">{{ self.text_intro }}</h4>
+    </div>
+    <div class="tt-accordion tt-ac-xlg tt-ac-borders">
+      {% for service in self.service_info %}
+        <div class="tt-accordion-item anim-fadeinup">
+          <div class="tt-accordion-heading">
+            <h3 class="tt-ac-head-title">{{ service.title }}</h3>
+            {#          <div class="tt-accordion-subtext">Mauris mauris ante</div>#}
+            <div class="tt-accordion-caret-wrap">
+              <div class="tt-accordion-caret magnetic-item"></div>
+            </div>
+          </div> <!-- /.tt-accordion-heading -->
+          <div class="tt-accordion-content max-width-800">
+            <p>{{ service.text }}</p>
+            <div class="tt-btn tt-btn-link">
+              <a href="{{ service.button_page.url }}" data-hover="Believe In Magic">{{ service.button_text }}</a>
+            </div>
+          </div> <!-- /.tt-accordion-content -->
+        </div> <!-- /.tt-accordion-item -->
+      {% endfor %}
+    </div>
+    <!-- End accordion -->
+  </div> <!-- /.tt-section-inner -->
+</div>
+<!-- End tt-section -->
